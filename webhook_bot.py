@@ -127,4 +127,13 @@ def set_webhook():
     )
 
 if __name__ == "__main__":
+    import asyncio
+
+    async def startup():
+        print("⚙️ Setting webhook...")
+        await telegram_app.bot.set_webhook(url=f"{WEBHOOK_URL}/webhook")
+        print("✅ Webhook set successfully!")
+
+    asyncio.run(startup())
     flask_app.run(host="0.0.0.0", port=5000)
+
