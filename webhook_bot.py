@@ -119,23 +119,14 @@ async def webhook():
     await telegram_app.process_update(update)
     return "OK", 200
     
-@flask_app.before_first_request
-def set_webhook():
-    import asyncio
-    asyncio.create_task(
-        telegram_app.bot.set_webhook(url=f"{WEBHOOK_URL}/webhook")
-    )
-
 import asyncio
 
-# ... other code like imports, handlers, routes ...
-
-async def set_webhook_and_run():
-    print("⚙️ Setting webhook...")
+async def set_webhook():
+    print("⚙️ Setting Telegram webhook...")
     await telegram_app.bot.set_webhook(url=f"{WEBHOOK_URL}/webhook")
-    print("✅ Webhook set!")
+    print("✅ Webhook successfully set!")
 
-# Run it right after defining it
-asyncio.run(set_webhook_and_run())
+asyncio.run(set_webhook())
+
 
 
