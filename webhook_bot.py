@@ -118,10 +118,13 @@ async def webhook():
     update = Update.de_json(request.get_json(force=True), telegram_app.bot)
     await telegram_app.process_update(update)
     return "OK", 200
-
-@flask_app.before_request
+    
+@flask_app.before_first_request
 def set_webhook():
-    telegram_app.bot.set_webhook(url=f"{WEBHOOK_URL}/webhook")
+    import asyncio
+    asyncio.create_task(
+        telegram_app.bot.set_webhook(url=f"{WEBHOOK_URL}/webhook")
+    )
 
 if __name__ == "__main__":
     flask_app.run(host="0.0.0.0", port=5000)
