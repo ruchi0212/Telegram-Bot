@@ -126,14 +126,16 @@ def set_webhook():
         telegram_app.bot.set_webhook(url=f"{WEBHOOK_URL}/webhook")
     )
 
-if __name__ == "__main__":
-    import asyncio
+import asyncio
 
-    async def startup():
-        print("⚙️ Setting webhook...")
-        await telegram_app.bot.set_webhook(url=f"{WEBHOOK_URL}/webhook")
-        print("✅ Webhook set successfully!")
+# ... other code like imports, handlers, routes ...
 
-    asyncio.run(startup())
-    flask_app.run(host="0.0.0.0", port=5000)
+async def set_webhook_and_run():
+    print("⚙️ Setting webhook...")
+    await telegram_app.bot.set_webhook(url=f"{WEBHOOK_URL}/webhook")
+    print("✅ Webhook set!")
+
+# Run it right after defining it
+asyncio.run(set_webhook_and_run())
+
 
