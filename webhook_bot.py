@@ -152,11 +152,15 @@ def home():
 
 @flask_app.route("/webhook", methods=["POST"])
 async def webhook():
-    data = request.get_json(force=True)
-    print("📩 Webhook received:", data)  # Debug log
-    update = Update.de_json(data, telegram_app.bot)
-    await telegram_app.process_update(update)
-    return "OK", 200
+    try:
+        data = request.get_json(force=True)
+        print("📩 Webhook received:", data)
+        update = Update.de_json(data, telegram_app.bot)
+        await telegram_app.process_update(update)
+        return "OK", 200
+    except Exception as e:
+        print("❌ Error in webhook:", str(e))
+        return "Internal Server Error", 500
 
 # Set the webhook using asyncio (not Flask decorators)
 import asyncio
