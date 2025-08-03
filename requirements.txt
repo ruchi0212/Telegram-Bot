@@ -1,3 +1,4 @@
 Flask[async]
 python-telegram-bot==20.3
 python-dotenv
+hypercorn
