@@ -165,10 +165,8 @@ async def webhook():
 # Set the webhook using asyncio (not Flask decorators)
 import asyncio
 
-async def set_webhook():
-    print("⚙️ Setting Telegram webhook...")
-    await telegram_app.bot.set_webhook(url=f"{WEBHOOK_URL}/webhook")
-    print("✅ Webhook successfully set!")
+if __name__ == "__main__":
+    print("🤖 Running bot in polling mode...")
+    telegram_app.run_polling()
 
-asyncio.run(set_webhook())
 
