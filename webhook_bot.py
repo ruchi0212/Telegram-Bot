@@ -170,5 +170,5 @@ async def set_webhook():
     await telegram_app.bot.set_webhook(url=f"{WEBHOOK_URL}/webhook")
     print("✅ Webhook successfully set!")
 
-# Run webhook setter once when starting server
 asyncio.run(set_webhook())
+
